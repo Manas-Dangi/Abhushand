@@ -3,433 +3,392 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abhushan By Jyoti | Premium Jewelry - 20% OFF</title>
+    <title>Abhushan By Jyoti | Premium Jewelry Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
     <style>
+      :root {
+        --brand-gold: #c5a059;
+        --brand-cream: #fffaf5;
+        --brand-dark: #1a1a1a;
+      }
+
       body {
         font-family: "Lato", sans-serif;
-        background-color: #fdf8f6;
+        background-color: var(--brand-cream);
         scroll-behavior: smooth;
+        overflow-x: hidden;
+        color: var(--brand-dark);
       }
-      h1,
-      h2,
-      h3,
-      .brand-font {
-        font-family: "Playfair Display", serif;
-      }
+
+      h1, h2, h3, .brand-font { font-family: "Playfair Display", serif; }
+
       .glass-effect {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
       }
+
       .product-card {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         background: white;
+        border: 1px solid rgba(197, 160, 89, 0.1);
       }
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      
+      @media (min-width: 1024px) {
+        .product-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+          border-color: var(--brand-gold);
+        }
       }
-      .image-container {
+
+      .nav-link {
         position: relative;
-        width: 100%;
-        padding-bottom: 100%;
-        overflow: hidden;
-        background-color: #f9f9f9;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.3s;
+        cursor: pointer;
       }
-      .product-image {
+      .nav-link::after {
+        content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s;
+        width: 0; height: 2px; bottom: -4px; left: 0;
+        background-color: var(--brand-gold);
+        transition: width 0.3s;
       }
-      .product-card:hover .product-image {
-        transform: scale(1.1);
-      }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .filter-btn.active {
-        background-color: #111827;
-        color: white;
-        border-color: #111827;
-      }
-      .float-btn {
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-      }
+      .nav-link:hover::after { width: 100%; }
+      .nav-link:hover { color: var(--brand-gold); }
+
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+
       .slider-container {
         position: relative;
         overflow: hidden;
-        height: 400px;
+        height: 300px;
+        border-radius: 24px;
       }
+      @media (min-width: 768px) { .slider-container { height: 450px; } }
+      @media (min-width: 1024px) { .slider-container { height: 550px; } }
+
       .slide-img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; opacity: 0;
         animation: slideShow 15s infinite;
       }
-      .slide-img:nth-child(1) {
-        animation-delay: 0s;
-      }
-      .slide-img:nth-child(2) {
-        animation-delay: 5s;
-      }
-      .slide-img:nth-child(3) {
-        animation-delay: 10s;
-      }
+      .slide-img:nth-child(1) { animation-delay: 0s; }
+      .slide-img:nth-child(2) { animation-delay: 5s; }
+      .slide-img:nth-child(3) { animation-delay: 10s; }
+      
       @keyframes slideShow {
-        0%,
-        33% {
-          opacity: 1;
-        }
-        43%,
-        100% {
-          opacity: 0;
-        }
+        0%, 33% { opacity: 1; transform: scale(1); }
+        43%, 100% { opacity: 0; transform: scale(1.05); }
       }
-      .discount-badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        background: #ef4444;
+
+      #mobile-menu-sidebar {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .btn-primary {
+        background-color: var(--brand-dark);
         color: white;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 800;
-        z-index: 20;
-        text-transform: uppercase;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: var(--brand-gold);
       }
     </style>
   </head>
 
-  <body class="text-gray-800">
+  <body class="antialiased">
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+      class="hidden fixed bottom-32 right-6 z-[90] w-12 h-12 bg-white text-gray-800 rounded-full flex items-center justify-center shadow-xl border border-gray-100 transition-all hover:bg-gray-50 active:scale-90">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- WhatsApp & Phone Floating Action -->
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col gap-4">
-      <a
-        href="tel:+917389850997"
-        class="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-blue-700 active:scale-90 transition-all"
-      >
-        <i class="fa-solid fa-phone text-2xl"></i>
+      <a href="tel:+917389850997" class="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90 transition-all">
+        <i class="fa-solid fa-phone text-xl"></i>
       </a>
-      <a
-        href="https://wa.me/917389850997"
-        target="_blank"
-        class="float-btn w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 active:scale-90 transition-all"
-      >
+      <a href="https://wa.me/917389850997" target="_blank" class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all animate-bounce">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
       </a>
     </div>
 
-    <nav class="fixed w-full z-50 glass-effect shadow-sm">
-      <div
-        class="bg-red-600 text-white text-center py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-widest"
-      >
-        🔥 Launch Offer: Flat 20% OFF for 24 Hours! 🔥
-      </div>
-      <div
-        class="container mx-auto px-4 py-3 flex justify-between items-center"
-      >
-        <div
-          class="flex items-center gap-2 cursor-pointer"
-          onclick="showSection('home')"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=100"
-            class="w-10 h-10 rounded-full border border-yellow-500"
-            alt="logo"
-          />
-          <span class="text-xl md:text-2xl font-bold brand-font"
-            >Abhushan_By_Jyoti</span
-          >
+    <!-- Mobile Navigation Sidebar -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[150] bg-black/50 hidden backdrop-blur-sm" onclick="toggleMobileMenu()">
+      <div id="mobile-menu-sidebar" class="absolute left-0 top-0 h-full w-[300px] bg-white shadow-2xl transform -translate-x-full flex flex-col" onclick="event.stopPropagation()">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <div>
+                <h2 class="brand-font text-xl font-bold">Abhushan</h2>
+                <p class="text-[9px] uppercase tracking-widest text-[#c5a059]">Menu Navigation</p>
+            </div>
+            <button onclick="toggleMobileMenu()"><i class="fa-solid fa-xmark text-gray-400 text-xl"></i></button>
         </div>
-        <div class="flex items-center gap-4">
-          <button
-            onclick="checkAdminPassword()"
-            class="text-xs border px-3 py-1 rounded-full bg-gray-100 font-bold hover:bg-gray-200 uppercase tracking-tighter"
-          >
+        <div class="flex flex-col p-6 space-y-6">
+            <a href="javascript:void(0)" onclick="showSection('home'); toggleMobileMenu()" class="nav-link text-gray-800 flex items-center gap-3"><i class="fa-solid fa-house text-gray-300"></i> Home</a>
+            <a href="#products-grid" onclick="toggleMobileMenu()" class="nav-link text-gray-800 flex items-center gap-3"><i class="fa-solid fa-gem text-gray-300"></i> Collections</a>
+            <a href="javascript:void(0)" onclick="filterProducts('earring'); toggleMobileMenu()" class="nav-link text-gray-800 flex items-center gap-3"><i class="fa-solid fa-star text-gray-300"></i> Best Sellers</a>
+            <a href="javascript:void(0)" onclick="filterProducts('Oxsidise-earring'); toggleMobileMenu()" class="nav-link text-gray-800 flex items-center gap-3"><i class="fa-solid fa-clock-rotate-left text-gray-300"></i> New Arrivals</a>
+            <a href="#footer" onclick="toggleMobileMenu()" class="nav-link text-gray-800 flex items-center gap-3"><i class="fa-solid fa-envelope text-gray-300"></i> Contact Us</a>
+            <div class="pt-10">
+                <button onclick="checkAdminPassword(); toggleMobileMenu()" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-gray-200 px-6 py-2 rounded-full">Admin Access</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-effect border-b border-gray-100">
+      <div class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
+        <!-- Mobile Trigger -->
+        <button class="md:hidden p-2 text-gray-700 hover:text-[#c5a059]" onclick="toggleMobileMenu()">
+          <i class="fa-solid fa-bars-staggered text-2xl"></i>
+        </button>
+
+        <!-- Brand Identity -->
+        <div class="flex items-center gap-2 sm:gap-3 cursor-pointer" onclick="showSection('home')">
+          <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-[#c5a059] p-0.5 shadow-sm">
+            <img src="logo.png" class="w-full h-full object-cover rounded-full" alt="logo" />
+          </div>
+          <!-- UPDATED: Visible on all screens including mobile -->
+          <div class="block">
+            <h1 class="text-sm sm:text-lg md:text-2xl font-bold brand-font tracking-tight text-gray-900 leading-none">Abhushan</h1>
+            <p class="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] text-[#c5a059] font-bold">By Jyoti</p>
+          </div>
+        </div>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8 lg:gap-12">
+            <a href="javascript:void(0)" onclick="showSection('home')" class="nav-link">Home</a>
+            <a href="#products-grid" class="nav-link">Collections</a>
+            <a href="javascript:void(0)" onclick="filterProducts('earring')" class="nav-link">Best Sellers</a>
+            <a href="javascript:void(0)" onclick="filterProducts('Oxsidise-earring')" class="nav-link text-nowrap">New Arrivals</a>
+        </div>
+        
+        <!-- Action Group -->
+        <div class="flex items-center gap-2 sm:gap-4">
+          <div class="relative cursor-pointer group" onclick="toggleCart()">
+            <div class="p-2.5 rounded-full hover:bg-gray-100 transition-colors">
+              <i class="fa-solid fa-bag-shopping text-xl text-gray-700"></i>
+            </div>
+            <span id="cart-count" class="absolute top-0 right-0 bg-[#c5a059] text-white text-[9px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-lg border-2 border-white">0</span>
+          </div>
+          <button onclick="checkAdminPassword()" class="hidden lg:block text-[9px] border border-gray-200 px-4 py-1.5 rounded-full bg-white font-bold hover:bg-gray-50 uppercase tracking-widest text-gray-400 shadow-sm">
             Admin
           </button>
-          <div class="relative cursor-pointer" onclick="toggleCart()">
-            <i class="fa-solid fa-shopping-bag text-2xl text-gray-700"></i>
-            <span
-              id="cart-count"
-              class="absolute -top-1 -right-2 bg-yellow-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full"
-              >0</span
-            >
-          </div>
         </div>
       </div>
     </nav>
 
-    <main class="pt-28 min-h-screen">
-      <section id="home-section" class="container mx-auto px-4">
-        <div
-          class="slider-container w-full rounded-3xl mb-8 shadow-xl relative"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1000"
-            class="slide-img"
-            alt="Slider 1"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1000"
-            class="slide-img"
-            alt="Slider 2"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1000"
-            class="slide-img"
-            alt="Slider 3"
-          />
-          <div class="absolute inset-0 bg-black/40 z-10 rounded-3xl"></div>
-          <div
-            class="relative z-20 h-full flex flex-col justify-center px-8 text-white"
-          >
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">
-              <span class="text-yellow-400">Grand Launch</span><br />Flat 20%
-              OFF
-            </h1>
-            <p class="mb-6 max-w-md text-sm md:text-lg text-gray-200">
-              Exquisite handpicked jewelry designs for your most special
-              moments.
+    <main class="pt-24 md:pt-32">
+      <section id="home-section" class="container mx-auto px-4 max-w-7xl">
+    
+        </div>
+
+        <!-- Hero Slider Section -->
+        <div class="slider-container shadow-2xl mb-12 relative group">
+          <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1400" class="slide-img" alt="Jewelry 1" />
+          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1400" class="slide-img" alt="Jewelry 2" />
+          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1400" class="slide-img" alt="Jewelry 3" />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent z-10"></div>
+          
+          <div class="relative z-20 h-full flex flex-col justify-center px-8 md:px-16 text-white">
+            <h2 class="text-3xl md:text-7xl font-bold mb-4 leading-tight fade-in-up">
+              Timeless <br /><span class="text-[#c5a059]">Jewelry Pieces</span>
+            </h2>
+            <p class="mb-8 max-w-md text-sm md:text-xl text-gray-200 font-light leading-relaxed">
+              Exquisite handpicked jewelry designs crafted to celebrate your moments.
             </p>
-            <button
-              onclick="document.getElementById('products-grid').scrollIntoView()"
-              class="w-fit bg-yellow-500 text-black font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition uppercase text-xs tracking-widest"
-            >
-              Shop Collection
+            <button onclick="document.getElementById('products-grid').scrollIntoView({behavior: 'smooth'})" 
+              class="w-fit bg-[#c5a059] text-white font-bold py-4 px-12 rounded-full shadow-xl hover:bg-[#b38f4d] transition-all uppercase text-xs tracking-widest active:scale-95">
+              Explore Now
             </button>
           </div>
         </div>
 
-        <div
-          class="flex gap-2 mb-8 overflow-x-auto no-scrollbar py-2 justify-center"
-        >
-          <button
-            onclick="filterProducts('all', this)"
-            class="filter-btn active whitespace-nowrap px-6 py-2 rounded-full border border-gray-900 font-bold text-sm"
-          >
-            All
-          </button>
-          <button
-            onclick="filterProducts('earring', this)"
-            class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-gray-900 font-bold text-sm"
-          >
-            Earrings
-          </button>
-          <button
-            onclick="filterProducts('Oxsidise-earring', this)"
-            class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-gray-900 font-bold text-sm"
-          >
-            Oxidized
-          </button>
-          <button
-            onclick="filterProducts('bangle', this)"
-            class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-gray-900 font-bold text-sm"
-          >
-            Bangles
-          </button>
+        <!-- Filters -->
+        <div class="flex gap-4 mb-10 overflow-x-auto no-scrollbar py-2 justify-start md:justify-center px-4">
+          <button onclick="filterProducts('all', this)" class="filter-btn active whitespace-nowrap px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-sm bg-white">All Masterpieces</button>
+          <button onclick="filterProducts('earring', this)" class="filter-btn whitespace-nowrap px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-sm bg-white">Earrings</button>
+          <button onclick="filterProducts('Oxsidise-earring', this)" class="filter-btn whitespace-nowrap px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-sm bg-white">Oxidized</button>
+          <button onclick="filterProducts('bangle', this)" class="filter-btn whitespace-nowrap px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-sm bg-white">Bangles</button>
         </div>
 
-        <div
-          id="products-grid"
-          class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-20"
-        ></div>
+        <!-- Product Grid -->
+        <div id="products-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-20"></div>
+
+        <!-- Trust Markers -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-16 px-8 bg-white rounded-[40px] shadow-sm border border-gray-50 mb-20">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-shield-halved text-xl text-[#c5a059]"></i></div>
+                <h4 class="font-bold text-lg mb-1">Genuine Quality</h4>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">Handmade with care</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-truck-fast text-xl text-[#c5a059]"></i></div>
+                <h4 class="font-bold text-lg mb-1">Fast Delivery</h4>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">Secure doorstep shipping</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-headset text-xl text-[#c5a059]"></i></div>
+                <h4 class="font-bold text-lg mb-1">Personal Support</h4>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">Connect on WhatsApp</p>
+            </div>
+        </div>
       </section>
 
-      <section id="admin-section" class="container mx-auto px-4 hidden pb-20">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold brand-font">Order History</h2>
-          <button
-            onclick="showSection('home')"
-            class="text-red-500 font-bold border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50"
-          >
-            Logout
-          </button>
+      <!-- Admin Panel (Dashboard) -->
+      <section id="admin-section" class="container mx-auto px-4 hidden pb-20 max-w-6xl">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 pt-10 border-b border-gray-100 pb-6 gap-4">
+          <h2 class="text-3xl font-bold brand-font">Store Orders</h2>
+          <button onclick="showSection('home')" class="text-red-500 font-bold border border-red-100 px-8 py-2 rounded-full hover:bg-red-50">Exit Admin</button>
         </div>
-        <div class="bg-white rounded-xl shadow-md overflow-x-auto">
-          <table class="w-full text-left min-w-[700px]">
-            <thead class="bg-gray-100">
-              <tr>
-                <th class="p-4 text-xs font-bold uppercase">ID</th>
-                <th class="p-4 text-xs font-bold uppercase">Customer</th>
-                <th class="p-4 text-xs font-bold uppercase">Items</th>
-                <th class="p-4 text-xs font-bold uppercase">Total</th>
-                <th class="p-4 text-xs font-bold uppercase">Action</th>
-              </tr>
-            </thead>
-            <tbody id="orders-table-body" class="divide-y text-sm"></tbody>
-          </table>
-          <div id="no-orders-msg" class="p-10 text-center text-gray-400">
-            No orders recorded in this session.
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left min-w-[800px]">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="p-6 text-xs font-bold uppercase text-gray-400">Order ID</th>
+                  <th class="p-6 text-xs font-bold uppercase text-gray-400">Customer</th>
+                  <th class="p-6 text-xs font-bold uppercase text-gray-400">Items</th>
+                  <th class="p-6 text-xs font-bold uppercase text-gray-400">Total</th>
+                  <th class="p-6 text-xs font-bold uppercase text-gray-400">Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body" class="divide-y divide-gray-50"></tbody>
+            </table>
           </div>
+          <div id="no-orders-msg" class="p-20 text-center text-gray-300 italic">No orders found.</div>
         </div>
       </section>
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-12">
-      <div class="container mx-auto px-4 text-center">
-        <h3 class="text-white text-2xl font-bold brand-font mb-4">
-          Abhushan <span class="text-yellow-500">By Jyoti</span>
-        </h3>
-        <p class="text-sm mb-2">Phad Singh Pura, Khargone, Madhya Pradesh</p>
-        <p class="text-xs mb-6">+91 7389850997</p>
-        <p class="text-[10px] uppercase tracking-widest">
+    <!-- Brand Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-100 pt-20 pb-10">
+      <div class="container mx-auto px-4 max-w-7xl">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 text-center md:text-left">
+          <div class="md:col-span-2">
+            <h3 class="text-2xl font-bold brand-font text-gray-900 mb-4">Abhushan By Jyoti</h3>
+            <p class="text-sm text-gray-400 leading-relaxed max-w-sm mx-auto md:mx-0">Elevate your elegance with our meticulously handpicked jewelry, where every piece tells a unique story of craftsmanship.</p>
+          </div>
+          <div>
+            <h4 class="text-gray-900 font-bold mb-6 text-xs uppercase tracking-widest">Connect With Us</h4>
+            <p class="text-sm text-gray-500 mb-2">Phad Singh Pura, Khargone (MP)</p>
+            <p class="text-sm text-gray-500">+91 7389850997</p>
+          </div>
+          <div>
+              <h4 class="text-gray-900 font-bold mb-6 text-xs uppercase tracking-widest">Explore</h4>
+              <ul class="space-y-3 text-sm text-gray-500">
+                  <li><a href="#" class="hover:text-[#c5a059]">About Boutique</a></li>
+                  <li><a href="#" class="hover:text-[#c5a059]">Shipping Policy</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-gray-100 text-center text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">
           &copy; 2025 Abhushan By Jyoti. All Rights Reserved.
-        </p>
+        </div>
       </div>
     </footer>
 
-    <div id="cart-modal" class="fixed inset-0 z-[110] hidden">
-      <div
-        class="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onclick="toggleCart()"
-      ></div>
-      <div
-        class="absolute right-0 top-0 h-full w-full sm:max-w-md bg-white p-6 shadow-2xl flex flex-col"
-      >
-        <div class="flex justify-between items-center border-b pb-4 mb-4">
-          <h2 class="text-2xl font-bold brand-font">
-            Your Bag
-            <span class="text-xs text-red-500 ml-2">20% OFF Applied</span>
-          </h2>
-          <button onclick="toggleCart()">
-            <i class="fa-solid fa-xmark text-2xl text-gray-400"></i>
-          </button>
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-[200] hidden">
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleCart()"></div>
+      <div class="absolute right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-2xl flex flex-col">
+        <div class="flex justify-between items-center p-6 border-b border-gray-100">
+          <h2 class="text-2xl font-bold brand-font text-gray-900">Your Shopping Bag</h2>
+          <button onclick="toggleCart()"><i class="fa-solid fa-xmark text-xl text-gray-400"></i></button>
         </div>
-        <div
-          id="cart-items-container"
-          class="flex-1 overflow-y-auto space-y-4 mb-4 no-scrollbar"
-        ></div>
-
-        <div class="bg-gray-50 p-4 rounded-xl space-y-3 mb-4 border">
-          <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">
-            Delivery Details
-          </p>
-          <input
-            type="text"
-            id="customer-name"
-            placeholder="Full Name"
-            class="w-full p-3 border rounded-lg text-sm outline-none focus:border-yellow-500"
-          />
-          <input
-            type="tel"
-            id="customer-mobile"
-            placeholder="WhatsApp Number"
-            class="w-full p-3 border rounded-lg text-sm outline-none focus:border-yellow-500"
-          />
-        </div>
-
-        <div class="border-t pt-4">
-          <div class="flex justify-between text-xl font-bold mb-4">
-            <span>Total Amount</span>
-            <span id="cart-total" class="text-yellow-700">₹0</span>
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6"></div>
+        <div class="p-6 bg-gray-50 border-t border-gray-100 space-y-4">
+          <input type="text" id="customer-name" placeholder="Enter Full Name" class="w-full p-4 border rounded-2xl text-sm focus:border-[#c5a059] outline-none shadow-sm" />
+          <input type="tel" id="customer-mobile" placeholder="WhatsApp Number" class="w-full p-4 border rounded-2xl text-sm focus:border-[#c5a059] outline-none shadow-sm" />
+          <div class="flex justify-between items-end mb-4 pt-4">
+            <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Grand Total</span>
+            <span id="cart-total" class="text-3xl font-bold text-[#c5a059]">₹0</span>
           </div>
-          <button
-            onclick="placeOrder()"
-            class="w-full bg-green-600 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-lg hover:bg-green-700 transition"
-          >
-            <i class="fa-brands fa-whatsapp text-2xl"></i> SEND ORDER ON
-            WHATSAPP
-          </button>
+          <button onclick="placeOrder()" class="w-full bg-[#1a1a1a] text-white py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-[#c5a059] transition-all">Complete Order on WhatsApp</button>
         </div>
       </div>
     </div>
 
     <script>
-      const DISCOUNT_RATE = 0.2;
-     const products = [
+      // PRODUCT LIST 
+       const products = [
         {
           id: 25,
           name: "Oxsidise-Earring 1",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring1.jpeg",
         },
         {
           id: 26,
           name: "Oxsidise-Earring 2",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring2.jpeg",
         },
         {
           id: 27,
           name: "Oxsidise-Earring 3",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring3.jpeg",
         },
         {
           id: 28,
           name: "Oxsidise-Earring 4",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring4.jpeg",
         },
         {
           id: 29,
           name: "Oxsidise-Earring 5",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring5.jpeg",
         },
         {
           id: 30,
           name: "Oxsidise-Earring 6",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring6.jpeg",
         },
         {
           id: 31,
           name: "Oxsidise-Earring 7",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring7.jpeg",
         },
         {
           id: 32,
           name: "Oxsidise-Earring 8",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring8.jpeg",
         },
         {
           id: 33,
           name: "Oxsidise-Earring 9",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring9.jpeg",
         },
         {
           id: 34,
           name: "Oxsidise-Earring 10",
           category: "Oxsidise-earring",
-          originalPrice: 50,
+          Price: 50,
           img: "oxsidise-earring10.jpeg",
         },
         
@@ -437,77 +396,77 @@
           id: 1,
           name: "Premium Jhumka (A)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing1_220.jpeg",
         },
         {
           id: 2,
           name: "Premium Jhumka (B)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing2_220.jpeg",
         },
         {
           id: 3,
           name: "Premium Jhumka (C)",
           category: "earring",
-          originalPrice: 250,
+          Price: 250,
           img: "earing3_250.jpeg",
         },
         {
           id: 4,
           name: "Premium Jhumka (D)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing4_220.jpeg",
         },
         {
           id: 5,
           name: "Premium Jhumka (E)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing5_220.jpeg",
         },
         {
           id: 6,
           name: "Premium Jhumka (F)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing6_220.jpeg",
         },
         {
           id: 7,
           name: "Premium Jhumka (G)",
           category: "earring",
-          originalPrice: 200,
+          Price: 200,
           img: "earing7_200.jpeg",
         },
         {
           id: 8,
           name: "Premium Jhumka (H)",
           category: "earring",
-          originalPrice: 160,
+          Price: 160,
           img: "earing8_160.jpeg",
         },
         {
           id: 9,
           name: "Premium Jhumka (I)",
           category: "earring",
-          originalPrice: 950,
+          Price: 120,
           img: "earing9.jpeg",
         },
         {
           id: 10,
           name: "Premium Jhumka (J)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing10.jpeg",
         },
         {
           id: 12,
           name: "Premium Jhumka (K)",
           category: "earring",
-          originalPrice: 220,
+          Price: 220,
           img: "earing11.jpeg",
         },
        
@@ -515,265 +474,239 @@
           id: 14,
           name: "Modern Bangle 2",
           category: "bangle",
-          originalPrice: 220,
+          Price: 220,
           img: "bangle2.jpeg",
         },
         {
           id: 15,
           name: "Modern Bangle 3",
           category: "bangle",
-          originalPrice: 100,
+          Price: 100,
           img: "bangle3.jpeg",
         },
         {
           id: 16,
           name: "Modern Bangle 4",
           category: "bangle",
-          originalPrice: 100,
+          Price: 100,
           img: "bangle4.jpeg",
         },
         {
           id: 17,
           name: "Modern Bangle 5",
           category: "bangle",
-          originalPrice: 220,
+          Price: 220,
           img: "bangle5.jpeg",
         },
         {
           id: 18,
           name: "Modern Bangle 6",
           category: "bangle",
-          originalPrice: 100,
+          Price: 100,
           img: "bangle6.jpeg",
         },
         {
           id: 19,
           name: "Modern Bangle 7",
           category: "bangle",
-          originalPrice: 60,
+          Price: 60,
           img: "bangle7.jpeg",
         },
         {
           id: 20,
           name: "Modern Bangle 8",
           category: "bangle",
-          originalPrice: 80,
+          Price: 80,
           img: "bangle8.jpeg",
         },
         {
           id: 21,
           name: "Modern Bangle 9",
           category: "bangle",
-          originalPrice: 60,
+          Price: 60,
           img: "bangle9.jpeg",
         },
         {
           id: 22,
           name: "Modern Bangle 10",
           category: "bangle",
-          originalPrice: 80,
+          Price: 80,
           img: "bangle10.jpeg",
         },
         {
           id: 23,
           name: "Modern Bangle 11",
           category: "bangle",
-          originalPrice: 100,
+          Price: 100,
           img: "bangle11.jpeg",
         },
         {
           id: 24,
           name: "Modern Bangle 12",
           category: "bangle",
-          originalPrice: 150,
+          Price: 150,
           img: "bangle12.jpeg",
         },
         
       ];
 
-      // Discount Calculation
-      products.forEach(
-        (p) => (p.price = Math.round(p.originalPrice * (1 - DISCOUNT_RATE)))
-      );
-
       let cart = [];
       let orderHistory = [];
+      let currentCategory = 'all';
 
-      function renderGrid(list) {
-        document.getElementById("products-grid").innerHTML = list
-          .map(
-            (p) => `
-          <div class="product-card rounded-3xl overflow-hidden border border-gray-100 flex flex-col h-full">
-            <div class="discount-badge">20% OFF</div>
-            <div class="image-container">
-              <img src="${p.img}" class="product-image" onerror="this.src='https://via.placeholder.com/400x400?text=Jewelry'">
-            </div>
-            <div class="p-4 text-center flex-grow flex flex-col">
-              <h3 class="font-bold text-sm mb-2 truncate">${p.name}</h3>
-              <div class="flex justify-center items-center gap-2 mb-4">
-                <span class="text-yellow-600 font-bold text-lg">₹${p.price}</span>
-                <span class="text-gray-400 line-through text-xs">₹${p.originalPrice}</span>
-              </div>
-              <button onclick="addToCart(${p.id})" class="mt-auto w-full py-2.5 rounded-xl border-2 border-gray-900 text-xs font-bold hover:bg-gray-900 hover:text-white transition uppercase tracking-wider">Add to Bag</button>
-            </div>
-          </div>
-        `
-          )
-          .join("");
+      // Functions for UI
+      function toggleMobileMenu() {
+          const menu = document.getElementById("mobile-menu-overlay");
+          const sidebar = document.getElementById("mobile-menu-sidebar");
+          if (menu.classList.contains("hidden")) {
+              menu.classList.remove("hidden");
+              setTimeout(() => sidebar.style.transform = "translateX(0)", 10);
+          } else {
+              sidebar.style.transform = "translateX(-100%)";
+              setTimeout(() => menu.classList.add("hidden"), 400);
+          }
       }
 
-      window.filterProducts = (cat, btn) => {
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach((b) => b.classList.remove("active"));
-        if (btn) btn.classList.add("active");
-        renderGrid(
-          cat === "all" ? products : products.filter((p) => p.category === cat)
-        );
+      window.onscroll = function() {
+        const btn = document.getElementById("back-to-top");
+        if (window.pageYOffset > 400) { btn.classList.remove("hidden"); btn.classList.add("flex"); } 
+        else { btn.classList.add("hidden"); btn.classList.remove("flex"); }
       };
 
+      function renderGrid(list) {
+        const grid = document.getElementById("products-grid");
+        if (list.length === 0) {
+          grid.innerHTML = `<div class="col-span-full text-center py-24 text-gray-400">No jewelry items found for this search.</div>`;
+          return;
+        }
+        grid.innerHTML = list.map(p => `
+          <div class="product-card rounded-[32px] overflow-hidden flex flex-col h-full shadow-sm">
+            <div class="image-container overflow-hidden">
+              <img src="${p.img}" class="product-image" onerror="this.src='https://via.placeholder.com/500?text=Jewellery'">
+            </div>
+            <div class="p-5 text-center flex-grow flex flex-col">
+              <h3 class="font-bold text-sm mb-2 text-gray-800 line-clamp-1">${p.name}</h3>
+              <div class="flex justify-center items-center gap-2 mb-5">
+                <span class="text-[#c5a059] font-bold text-xl">₹${p.Price}</span>
+              </div>
+              <button onclick="addToCart(${p.id})" class="btn-primary mt-auto w-full py-3 rounded-2xl text-[10px] font-bold uppercase tracking-widest active:scale-95 shadow-md">Add to Bag</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      window.handleSearch = (term) => {
+        const filtered = products.filter(p => 
+          (currentCategory === 'all' || p.category === currentCategory) &&
+          p.name.toLowerCase().includes(term.toLowerCase())
+        );
+        renderGrid(filtered);
+      };
+
+      window.filterProducts = (cat, btn) => {
+        currentCategory = cat;
+        if (btn) {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+        }
+        const searchTerm = document.getElementById("product-search").value;
+        const filtered = cat === "all" ? products : products.filter(p => p.category === cat);
+        renderGrid(filtered.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())));
+      };
+
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Adds a product to the user's cart
+ * @param {number} id - the id of the product to add
+ */
+/*******  9f2a391e-4fa1-4be7-929e-d27d08978c5e  *******/
       window.addToCart = (id) => {
-        cart.push(products.find((p) => p.id === id));
+        const item = products.find(p => p.id === id);
+        cart.push(item);
         updateUI();
       };
 
       function updateUI() {
         document.getElementById("cart-count").innerText = cart.length;
-        const total = cart.reduce((sum, i) => sum + i.price, 0);
+        const total = cart.reduce((sum, i) => sum + i.Price, 0);
         document.getElementById("cart-total").innerText = "₹" + total;
-
         const container = document.getElementById("cart-items-container");
-        container.innerHTML =
-          cart.length === 0
-            ? '<div class="text-center text-gray-400 py-10"><i class="fa-solid fa-basket-shopping text-4xl mb-3 block"></i>Bag is empty</div>'
-            : cart
-                .map(
-                  (item, index) => `
-          <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
-            <div class="flex items-center gap-3">
-              <img src="${item.img}" class="w-12 h-12 rounded-lg object-cover shadow-sm" onerror="this.src='https://via.placeholder.com/50'">
-              <div>
-                <p class="font-bold text-sm text-gray-800">${item.name}</p>
-                <p class="text-xs font-bold text-green-600">₹${item.price}</p>
+        if (cart.length === 0) {
+          container.innerHTML = `<div class="text-center py-20 text-gray-300">Bag is currently empty.</div>`;
+        } else {
+          container.innerHTML = cart.map((item, index) => `
+            <div class="flex justify-between items-center bg-white p-4 rounded-3xl border border-gray-100 shadow-sm">
+              <div class="flex items-center gap-4">
+                <img src="${item.img}" class="w-14 h-14 rounded-2xl object-cover border border-gray-50 shadow-inner">
+                <div>
+                  <p class="font-bold text-xs text-gray-800 line-clamp-1">${item.name}</p>
+                  <p class="text-sm font-bold text-[#c5a059]">₹${item.Price}</p>
+                </div>
               </div>
+              <button onclick="cart.splice(${index},1);updateUI();" class="text-red-300 hover:text-red-500 transition-colors p-2"><i class="fa-solid fa-trash-can"></i></button>
             </div>
-            <button onclick="cart.splice(${index},1);updateUI();" class="text-red-400 p-2 hover:bg-red-50 rounded-full transition"><i class="fa-solid fa-trash-can"></i></button>
-          </div>
-        `
-                )
-                .join("");
+          `).join("");
+        }
       }
 
       window.placeOrder = () => {
         const name = document.getElementById("customer-name").value.trim();
         const mobile = document.getElementById("customer-mobile").value.trim();
-
-        if (!name || !mobile)
-          return alert("Please fill Name and WhatsApp Number!");
-        if (cart.length === 0) return alert("Your bag is empty!");
-
-        const total = cart.reduce((sum, i) => sum + i.price, 0);
-        const orderId = "AJ-" + Math.floor(1000 + Math.random() * 9000);
-
-        // WhatsApp Message Construction
-        let messageBody = `*NEW ORDER: ABHUSHAN BY JYOTI*\n`;
-        messageBody += `--------------------------\n`;
-        messageBody += `*Order ID:* #${orderId}\n`;
-        messageBody += `*Customer:* ${name}\n`;
-        messageBody += `*Mobile:* ${mobile}\n`;
-        messageBody += `--------------------------\n`;
-        messageBody += `*ITEMS ORDERED (20% OFF):*\n`;
-
-        cart.forEach((item, idx) => {
-          messageBody += `${idx + 1}. *${item.name}* - ₹${item.price}\n`;
-        });
-
-        messageBody += `--------------------------\n`;
-        messageBody += `*GRAND TOTAL: ₹${total}*\n`;
-        messageBody += `--------------------------\n`;
-        messageBody += `_Please confirm my order. Thank you!_`;
-
-        const encodedMessage = encodeURIComponent(messageBody);
-        const whatsappLink = `https://wa.me/917389850997?text=${encodedMessage}`;
-
-        window.open(whatsappLink, "_blank");
-
-        // Admin History Update
-        orderHistory.unshift({
-          id: orderId,
-          customerName: name,
-          customerMobile: mobile,
-          items: [...cart],
-          total,
-        });
-
-        // Reset
-        cart = [];
-        updateUI();
-        toggleCart();
+        if (!name || !mobile || cart.length === 0) return alert("Please fill Name, WhatsApp Number and add some jewelry to your bag.");
+        const total = cart.reduce((sum, i) => sum + i.Price, 0);
+        const orderId = "ABJ-" + Math.floor(1000 + Math.random() * 9000);
+        let msg = `*NEW ORDER: ABHUSHAN BY JYOTI*\n*Order ID:* #${orderId}\n*Customer:* ${name}\n*Total Value: ₹${total}*\n\n*Ordered Items:*`;
+        cart.forEach((item, idx) => { msg += `\n${idx + 1}. ${item.name} - ₹${item.Price}`; });
+        msg += `\n\n_Please confirm my order. Thank you!_`;
+        window.open(`https://api.whatsapp.com/send?phone=917389850997&text=${encodeURIComponent(msg)}`, "_blank");
+        orderHistory.unshift({ id: orderId, customerName: name, customerMobile: mobile, items: [...cart], total, date: new Date().toLocaleString() });
+        cart = []; updateUI(); toggleCart();
         document.getElementById("customer-name").value = "";
         document.getElementById("customer-mobile").value = "";
       };
 
-      window.toggleCart = () =>
-        document.getElementById("cart-modal").classList.toggle("hidden");
+      window.toggleCart = () => document.getElementById("cart-modal").classList.toggle("hidden");
 
       window.checkAdminPassword = () => {
-        const pass = prompt("Enter Admin Password:");
-        if (pass === "admin") {
+        if (prompt("Secure Access Password:") === "admin") {
           showSection("admin");
           updateAdminTable();
-        } else if (pass !== null) {
-          alert("Access Denied!");
-        }
+        } else alert("Invalid Password. Access Denied.");
       };
 
       function updateAdminTable() {
         const tbody = document.getElementById("orders-table-body");
-        document
-          .getElementById("no-orders-msg")
-          .classList.toggle("hidden", orderHistory.length > 0);
-        tbody.innerHTML = orderHistory
-          .map(
-            (o) => `
-          <tr class="hover:bg-gray-50 transition">
-            <td class="p-4 font-mono">#${o.id}</td>
-            <td class="p-4"><b>${
-              o.customerName
-            }</b><br><span class="text-xs text-gray-500">${
-              o.customerMobile
-            }</span></td>
-            <td class="p-4 text-[10px] text-gray-600">${o.items
-              .map((i) => i.name)
-              .join(", ")}</td>
-            <td class="p-4 font-bold text-green-700">₹${o.total}</td>
-            <td class="p-4"><button onclick="deleteOrder('${
-              o.id
-            }')" class="text-red-500 hover:scale-110 transition"><i class="fa-solid fa-trash-can"></i></button></td>
+        document.getElementById("no-orders-msg").classList.toggle("hidden", orderHistory.length > 0);
+        tbody.innerHTML = orderHistory.map(o => `
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="p-6 font-bold text-[#c5a059]">#${o.id}</td>
+            <td class="p-6">
+              <div class="font-bold text-gray-800">${o.customerName}</div>
+              <div class="text-[10px] text-gray-400 uppercase tracking-widest">${o.customerMobile}</div>
+            </td>
+            <td class="p-6 text-xs text-gray-500">${o.items.map(i => i.name).join(", ")}</td>
+            <td class="p-6 font-bold text-gray-900 text-lg">₹${o.total}</td>
+            <td class="p-6 text-center">
+              <button onclick="deleteOrder('${o.id}')" class="text-red-400 hover:text-red-600 transition-transform hover:scale-110"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
           </tr>
-        `
-          )
-          .join("");
+        `).join("");
       }
 
       window.deleteOrder = (id) => {
-        if (confirm("Delete this order record?")) {
-          orderHistory = orderHistory.filter((o) => o.id != id);
-          updateAdminTable();
+        if (confirm("Permanently delete this order record?")) {
+            orderHistory = orderHistory.filter(o => o.id != id);
+            updateAdminTable();
         }
       };
 
       window.showSection = (name) => {
-        document
-          .getElementById("home-section")
-          .classList.toggle("hidden", name !== "home");
-        document
-          .getElementById("admin-section")
-          .classList.toggle("hidden", name !== "admin");
-        window.scrollTo(0, 0);
+        document.getElementById("home-section").classList.toggle("hidden", name !== "home");
+        document.getElementById("admin-section").classList.toggle("hidden", name !== "admin");
+        window.scrollTo({top: 0, behavior: 'smooth'});
       };
 
-      // Start Page
+      // Initial Product Render
       renderGrid(products);
     </script>
   </body>
